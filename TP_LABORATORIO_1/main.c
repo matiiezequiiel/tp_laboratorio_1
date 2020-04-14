@@ -85,6 +85,10 @@ int main()
                     resultadoDivision=calcularDivision(primerOperando,segundoOperando);
                     resultadoFactorialUno=calcularFactorial(primerOperando);
                     resultadoFactorialDos=calcularFactorial(segundoOperando);
+                    system("cls");
+                    printf("OPERACIONES CALCULADAS, INFORME RESULTADOS CON OPCION 4.\n\n");
+                    system("pause");
+                    system("cls");
                 }
 
                 else
@@ -98,9 +102,11 @@ int main()
 
                 if(resultadoSuma==0)
                {
+                     system("color 40");
                      printf("Antes de informar los resultados debe realizar los calculos");
                      printf("\n\nPresione la opcion 3 para calcular y luego opcion 4 para ver los resultados.\n\n");
                      system("pause");
+                     system("color 0F");
                      system("cls");
                }else if(validarAmbosOperando(numeroMenuX,numeroMenuY)==0)
                      {
@@ -119,6 +125,7 @@ int main()
             break;
             default:
 
+                system("color 40");
                 printf("Ingreso una opcion no valida.\n");
                 printf("¿Desea continuar?");
                 printf("\n\n ¿S o N?: ");
@@ -126,6 +133,7 @@ int main()
                 scanf("%c",&respuesta);
                 if (toupper(respuesta)=='S')
                 {
+                     system("color 0F");
                      system("cls");
                      continue;
                 }
@@ -134,7 +142,9 @@ int main()
                     opcion=5;
                     printf("\n\nGracias por haber usado esta calculadora!.");
                  }
+
             break;
+
         }
 
 
@@ -209,11 +219,14 @@ float getOperando(char* operando)
 
     while(validarEntrada(operando)==1)
     {
+        system("color 40");
         printf("Numero no valido!!, Ingrese otro numero: ");
         fflush(stdin);
         gets(operando);
         validarEntrada(operando);
+
     }
+    system("color 0F");
 
     operandoValidado=atof(operando);
 
@@ -226,12 +239,20 @@ float getOperando(char* operando)
 int validarEntrada(char* entrada)
 {
      int i;
+     float numero;
      int lenght;
+     int contadorPuntos=0;
      lenght=strlen(entrada);
 
+    numero=atof(entrada);
+    if(numero==0)
+    {
+        return 1;
+    }
 
     if(entrada[0]=='\0')
        return 1;
+
 
      for (i=0;i<lenght;i++)
     {
@@ -239,12 +260,26 @@ int validarEntrada(char* entrada)
 
               if(isdigit(entrada[i])==0 || isspace(entrada[i]!=0)) //SI ES 0 ES UN DIGITO INVALIDO (NO ES NUMERO)
             {
-                if(entrada[i]!='.')// VER QUE NO FUNCIONAN NUMEROS NEGATIVOS.
-                    return 1;
-                if(entrada[i+1]!='-')
-                    return 1;
-                if(i==0)
+
+              if(entrada[i]!='-' && entrada[i]!='.')
+                return 1;
+
+              //SIGNO -
+              if(entrada[i]=='-')
+              {
+                  if( lenght==1 || i!=0 )
+                  return 1;
+              }
+              //SIGNO .
+               if(entrada[i]=='.')
+                   if(i==0)
                    return 1;
+               else
+                   contadorPuntos++;
+
+               if(contadorPuntos>1)
+                    return 1;
+
             }
 
 
@@ -259,10 +294,13 @@ int validarAmbosOperando(char* numeroUno,char* numeroDos)
 {
         if(numeroUno[0]=='X'||numeroDos[0]=='Y')
         {
+
+              system("color 40");
               printf("Alguno de los operandos no fueron cargados.\n\n");
               printf("Cargue con opcion 1 u opcion 2 ambos operandos para continuar.\n\n");
               system("pause");
               system("cls");
+              system("color 0F");
               return 1;
         }
         else
