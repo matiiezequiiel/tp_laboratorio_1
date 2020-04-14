@@ -229,17 +229,25 @@ int validarEntrada(char* entrada)
      int lenght;
      lenght=strlen(entrada);
 
+
+    if(entrada[0]=='\0')
+       return 1;
+
      for (i=0;i<lenght;i++)
     {
 
 
               if(isdigit(entrada[i])==0 || isspace(entrada[i]!=0)) //SI ES 0 ES UN DIGITO INVALIDO (NO ES NUMERO)
             {
-                if(entrada[i]!='.' && entrada[i]!='-')// VER QUE NO FUNCIONAN NUMEROS NEGATIVOS.
+                if(entrada[i]!='.')// VER QUE NO FUNCIONAN NUMEROS NEGATIVOS.
+                    return 1;
+                if(entrada[i+1]!='-')
                     return 1;
                 if(i==0)
-                    return 1;
+                   return 1;
             }
+
+
 
 
 
