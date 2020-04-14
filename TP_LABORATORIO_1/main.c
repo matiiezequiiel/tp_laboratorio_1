@@ -31,17 +31,20 @@ int main()
     char numeroMenuX[10]="X";
     char numeroMenuY[10]="Y";
     char respuesta=' ';
-    float resultadoSuma;
-    float resultadoResta;
-    float resultadoMultiplicacion;
-    float resultadoDivision;
-    unsigned long long int resultadoFactorial;
+    float resultadoSuma=0;
+    float resultadoResta=0;
+    float resultadoMultiplicacion=0;
+    float resultadoDivision=0;
+    unsigned long long int resultadoFactorialUno=0;
+    unsigned long long int resultadoFactorialDos=0;
+
     int auxFactorial;
 
 
     do
     {
-        opcion=mostrarMenu(numeroMenuX,numeroMenuY);
+        opcion=mostrarMenu(numeroMenuX,numeroMenuY,resultadoSuma,resultadoResta,resultadoMultiplicacion,
+                           resultadoDivision,resultadoFactorialUno,resultadoFactorialDos);
 
 
 
