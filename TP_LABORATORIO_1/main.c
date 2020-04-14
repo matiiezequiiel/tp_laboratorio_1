@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "funciones.h"
+
 
 
 /*
@@ -22,12 +22,17 @@ d) “El resultado de A*B es: r”
 e) “El factorial de A es: r1 y El factorial de B es: r2”
 5. Salir
 */
+
+//VER QUE NO FUNCIONAN NUMEROS NEGATIVOS
+//VER QUE SI NO CARGO NADA ME LO ACEPTA
+int mostrarMenu(char[] ,char[]);
+void mostrarMenuResultados(char[] ,char[],float,float,float,float,unsigned long long int,unsigned long long int);
 float getOperando(char[]);
 float calcularSuma(float operandoUno, float operandoDos);
 float calcularResta(float operandoUno, float operandoDos);
 float calcularMultiplicacion(float operandoUno, float operandoDos);
 float calcularDivision(float operandoUno, float operandoDos);
-unsigned long long int calcularFactorial(float operandoUno);
+unsigned long long int calcularFactorial(float operando);
 int validarEntrada(char[]);
 int validarAmbosOperando(char[],char[]);
 
@@ -46,13 +51,11 @@ int main()
     unsigned long long int resultadoFactorialUno=0;
     unsigned long long int resultadoFactorialDos=0;
 
-    int auxFactorial;
 
 
     do
     {
-        opcion=mostrarMenu(numeroMenuX,numeroMenuY,resultadoSuma,resultadoResta,resultadoMultiplicacion,
-                           resultadoDivision,resultadoFactorialUno,resultadoFactorialDos);
+      opcion=mostrarMenu(numeroMenuX,numeroMenuY);
 
         switch(opcion)
         {
@@ -81,7 +84,7 @@ int main()
                     resultadoMultiplicacion=calcularMultiplicacion(primerOperando,segundoOperando);
                     resultadoDivision=calcularDivision(primerOperando,segundoOperando);
                     resultadoFactorialUno=calcularFactorial(primerOperando);
-                    resultadoFactorialUno=calcularFactorial(primerOperando);
+                    resultadoFactorialDos=calcularFactorial(segundoOperando);
                 }
 
                 else
@@ -91,8 +94,46 @@ int main()
 
             break;
             case 4:
+
+
+                if(resultadoSuma==0)
+               {
+                     printf("Antes de informar los resultados debe realizar los calculos");
+                     printf("\n\nPresione la opcion 3 para calcular y luego opcion 4 para ver los resultados.\n\n");
+                     system("pause");
+                     system("cls");
+               }else if(validarAmbosOperando(numeroMenuX,numeroMenuY)==0)
+                     {
+                        mostrarMenuResultados(numeroMenuX,numeroMenuY,resultadoSuma,resultadoResta,resultadoMultiplicacion,
+                                               resultadoDivision,resultadoFactorialUno,resultadoFactorialDos);
+                     }
+                    else
+                    {
+                        continue;
+                    }
+
+
             break;
             case 5:
+                    printf("Gracias por haber usado esta calculadora!.");
+            break;
+            default:
+
+                printf("Ingreso una opcion no valida.\n");
+                printf("¿Desea continuar?");
+                printf("\n\n ¿S o N?: ");
+                fflush(stdin);
+                scanf("%c",&respuesta);
+                if (toupper(respuesta)=='S')
+                {
+                     system("cls");
+                     continue;
+                }
+                else
+                 {
+                    opcion=5;
+                    printf("\n\nGracias por haber usado esta calculadora!.");
+                 }
             break;
         }
 
@@ -103,6 +144,63 @@ int main()
     return 0;
 }
 
+void mostrarMenuResultados(char* numeroMenuX ,char* numeroMenuY ,float suma,float resta,
+                float multipicacion,float division,unsigned long long int factorialUno,
+                unsigned long long int factorialDos)
+{
+
+
+        printf("BIENVENIDOS A LA CALCULADORA!!\n\n");
+        printf("1. Ingresar 1er operando (A=%s)",numeroMenuX);
+        printf("\n2. Ingresar 2do operando (B=%s)", numeroMenuY);
+        printf("\n3. Calcular todas las operaciones.");
+        printf("\n  A). Calcular la suma (A+B)");
+        printf("\n  B). Calcular la resta (A-B)");
+        printf("\n  C). Calcular la division (A/B)");
+        printf("\n  D). Calcular la multiplicacion (A*B)");
+        printf("\n  E). Calcular el factorial (A!)");
+        printf("\n4. Informar resultados.");
+        printf("\n  A). El resultado de A+B es: %g",suma);
+        printf("\n  B). El resultado de A-B es: %g",resta);
+        printf("\n  C). El resultado de A/B es: %g",division);
+        printf("\n  D). El resultado de A/B es: %g",multipicacion);
+        printf("\n  E). El factorial de A es: %llu y El factorial de B es: %llu",factorialUno,factorialDos);
+        printf("\n5. Salir");
+        printf("\n\n\n");
+        system("pause");
+        system("cls");
+
+
+}
+
+int mostrarMenu(char* numeroMenuX ,char* numeroMenuY)
+{
+
+        int opcion;
+
+        printf("BIENVENIDOS A LA CALCULADORA!!\n\n");
+        printf("1. Ingresar 1er operando (A=%s)",numeroMenuX);
+        printf("\n2. Ingresar 2do operando (B=%s)", numeroMenuY);
+        printf("\n3. Calcular todas las operaciones.");
+        printf("\n  A). Calcular la suma (A+B)");
+        printf("\n  B). Calcular la resta (A-B)");
+        printf("\n  C). Calcular la division (A/B)");
+        printf("\n  D). Calcular la multiplicacion (A*B)");
+        printf("\n  E). Calcular el factorial (A!)");
+        printf("\n4. Informar resultados.");
+        printf("\n  A). El resultado de A+B es:");
+        printf("\n  B). El resultado de A-B es:");
+        printf("\n  C). El resultado de A/B es:");
+        printf("\n  D). El resultado de A/B es:");
+        printf("\n  E). El factorial de A es: y El factorial de B es: ");
+        printf("\n5. Salir");
+
+        printf("\n\nOpcion elegida:");
+        scanf("%d",& opcion);
+        system("cls");
+        return opcion;
+
+}
 
 
 float getOperando(char* operando)
@@ -195,7 +293,27 @@ float calcularDivision(float operandoUno, float operandoDos)
 
     return resultado;
 }
-unsigned long long int calcularFactorial(float operandoUno)
+unsigned long long int calcularFactorial(float operando)
 {
+     int i;
+     unsigned long long int resultado=1; //ver factorial de 0 y 1
 
+
+
+    for(i=operando;i>1;i--)
+    {
+        if (i==operando)
+        {
+            i--;
+            resultado=operando*i;
+        }
+
+        else
+        {
+            resultado=resultado*i;
+        }
+
+    }
+
+    return resultado;
 }
