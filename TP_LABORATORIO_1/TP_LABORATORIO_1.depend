@@ -1,15 +1,16 @@
 # depslib dependency file v1.0
-1586825071 source:c:\users\matii\eclipse-workspace\tp_laboratorio_1\tp_laboratorio_1 entregable\tp_laboratorio_1\funciones.c
+1587511144 source:c:\users\matii\eclipse-workspace\tp_laboratorio_1\tp_laboratorio_1 entregable\tp_laboratorio_1\funciones.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
 
-1586878735 source:c:\users\matii\eclipse-workspace\tp_laboratorio_1\tp_laboratorio_1 entregable\tp_laboratorio_1\main.c
+1587511153 source:c:\users\matii\eclipse-workspace\tp_laboratorio_1\tp_laboratorio_1 entregable\tp_laboratorio_1\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
+	"funciones.h"
 
-1586829383 c:\users\matii\eclipse-workspace\tp_laboratorio_1\tp_laboratorio_1 entregable\tp_laboratorio_1\funciones.h
+1587512283 c:\users\matii\eclipse-workspace\tp_laboratorio_1\tp_laboratorio_1 entregable\tp_laboratorio_1\funciones.h
 
