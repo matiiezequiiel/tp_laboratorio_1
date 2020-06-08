@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1589576652 source:c:\users\matii\eclipse-workspace\tp_laboratorio_2\tp_laboratorio_2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	"ArrayEmployees.h"
+	"validaciones.h"
+
+1589576786 source:c:\users\matii\eclipse-workspace\tp_laboratorio_2\tp_laboratorio_2\arrayemployees.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<string.h>
+	<ctype.h>
+	"ArrayEmployees.h"
+	"validaciones.h"
+
+1589576652 c:\users\matii\eclipse-workspace\tp_laboratorio_2\tp_laboratorio_2\arrayemployees.h
+
+1589575596 c:\users\matii\eclipse-workspace\tp_laboratorio_2\tp_laboratorio_2\validaciones.h
+
+1589576786 source:c:\users\matii\eclipse-workspace\tp_laboratorio_2\tp_laboratorio_2\validaciones.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<string.h>
+	<ctype.h>
+	"ArrayEmployees.h"
+	"validaciones.h"
+
