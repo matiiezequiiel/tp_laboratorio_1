@@ -223,6 +223,21 @@ return 1;
 
 int controller_saveAsBinary(char* path, LinkedList* pArrayListEmployee)
 {
+    FILE* fileBinary;
+    Employee p;
+    int i ;
+
+    fileBinary=fopen(path,"wb");
+
+    if(fileBinary!=NULL)
+    {
+        for(i=0;i<ll_len(pArrayListEmployee);i++)
+        {
+            p = ll_get(pArrayListEmployee,i);
+            fwrite(p,sizeof(Employee),1,fileBinary);
+        }
+        fclose(fileBinary);
+    }
 return 1;
 }
 
