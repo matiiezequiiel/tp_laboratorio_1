@@ -86,6 +86,7 @@ int main()
 
         case 8:
             controller_saveAsText("nuevo.csv",listaEmpleados);
+            printf("prueba"):
             break;
 
         case 9:
