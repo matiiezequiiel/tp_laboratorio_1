@@ -22,22 +22,17 @@ Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajad
     int sueldo;
 
     nuevoEmplParam=employee_new();
+
     id=atoi(idStr);
     hsTrabajadas=atoi(horasTrabajadasStr);
     sueldo=atoi(sueldoStr);
-    //  printf("%d\n",id);
 
 
 
-    employee_setId(nuevoEmplParam,id);/*VALIDAR Y PASAR A INT*/
-    // printf("%d\n",idStr);
+    employee_setId(nuevoEmplParam,id);
     employee_setNombre(nuevoEmplParam,nombreStr);
-    // printf("%s\n",nombreStr);
-    employee_setHorasTrabajadas(nuevoEmplParam,hsTrabajadas);/*VALIDAR Y PASAR A INT*/
-    // printf("%d\n",horasTrabajadasStr);
-    employee_setSueldo(nuevoEmplParam,sueldo);/*VALIDAR Y PASAR A FLOAT*/
-    // printf("%d\n",sueldoStr);
-    //system("pause");
+    employee_setHorasTrabajadas(nuevoEmplParam,hsTrabajadas);
+    employee_setSueldo(nuevoEmplParam,sueldo);
 
     return nuevoEmplParam;
 
