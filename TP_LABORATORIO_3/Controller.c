@@ -234,6 +234,9 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
     LinkedList* clonLinked;
     Employee* empleado;
     int opcion;
+    int ordenamiento;
+    char entrada[10];
+    int retorno=0;
 
     clonLinked=ll_clone(pArrayListEmployee);
 
@@ -247,24 +250,56 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
     switch(opcion)
     {
     case 1:
-        ll_sort(clonLinked,employee_CompareById,0);
+        printf("\nPara ordenar de forma descendente presione 0\n");
+        printf("Para ordenar de forma ascendente presione 1 \n\n");
+        printf("Ingrese opcion: ");
+        fflush(stdin);
+        gets(entrada);
+        ordenamiento=validarIntEntreRangos(entrada,0,1);
+        if(ordenamiento==0)
+        {
+            ll_sort(clonLinked,employee_CompareById,0);
+            retorno=1;
+        }
+        else
+        {
+            ll_sort(clonLinked,employee_CompareById,1);
+            retorno=1;
+        }
+
         break;
     case 2:
-        ll_sort(clonLinked,employee_CompareByName,0);
+        printf("\nPara ordenar de forma descendente presione 0\n");
+        printf("Para ordenar de forma ascendente presione 1 \n\n");
+        printf("Ingrese opcion: ");
+        fflush(stdin);
+        gets(entrada);
+        ordenamiento=validarIntEntreRangos(entrada,0,1);
+        if(ordenamiento==0)
+        {
+            ll_sort(clonLinked,employee_CompareByName,0);
+            retorno=1;
+        }
+        else
+        {
+            ll_sort(clonLinked,employee_CompareByName,1);
+            retorno=1;
+        }
         break;
     default:
         break;
     }
 
+    system("cls");
     printf("ID    NOMBRE    HS TRABAJADAS   SUELDO");
     for(int i=0; i<ll_len(clonLinked); i++)
     {
         empleado=ll_get(clonLinked,i);
         mostrarEmpleados(empleado);
     }
+    system("pause");
 
-
-    return 1;
+    return retorno;
 }
 
 
@@ -273,6 +308,7 @@ int controller_saveAsText(char* path, LinkedList* pArrayListEmployee)
     FILE* fileText;
     Employee* p;
     int i;
+    int retorno=0;
 
     fileText=fopen(path,"w");
 
@@ -285,14 +321,10 @@ int controller_saveAsText(char* path, LinkedList* pArrayListEmployee)
             p = (Employee*)ll_get(pArrayListEmployee, i);
             fprintf(fileText,"%d,%s,%d,%d\n",p->id,p->nombre,p->horasTrabajadas,p->sueldo);
         }
+        retorno=1;
         fclose(fileText);
     }
-
-
-
-
-
-    return 1;
+    return retorno;
 }
 
 
@@ -303,10 +335,7 @@ int controller_saveAsBinary(char* path, LinkedList* pArrayListEmployee)
     int i ;
     int cont=0;
     int lenght;
-
-    lenght=ll_len(pArrayListEmployee);
-    printf("%d\n",lenght);
-    system("pause");
+    int retorno=0;
 
     fileBinary=fopen(path,"wb");
 
@@ -317,13 +346,12 @@ int controller_saveAsBinary(char* path, LinkedList* pArrayListEmployee)
         {
             p =(Employee*)ll_get(pArrayListEmployee,i);
             fwrite(p,sizeof(Employee),1,fileBinary);
-            cont++;
+            retorno=1;
         }
-        printf("%d",cont);
-        system("pause");
+
         fclose(fileBinary);
     }
-    return 1;
+    return retorno;
 }
 
 int menuModificaciones(LinkedList* listaEmpleados,void* empleado,int index)

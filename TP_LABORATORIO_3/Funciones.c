@@ -5,7 +5,6 @@
 #include <string.h>
 #include <ctype.h>
 
-
 int mostrarMenuABM(void)
 {
         char entrada[10];
@@ -25,6 +24,7 @@ int mostrarMenuABM(void)
         printf("\n10. Salir.");
 
         printf("\n\nOpcion elegida:");
+        fflush(stdin);
         gets(entrada);
 
         opcion=validarIntEntreRangos(entrada,1,10);

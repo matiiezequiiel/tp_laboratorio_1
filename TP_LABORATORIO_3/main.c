@@ -154,11 +154,36 @@ int main()
             break;
 
         case 8:
-            controller_saveAsText("prueba.csv",listaEmpleados);
+            retorno=controller_saveAsText("prueba.csv",listaEmpleados);
+            if(retorno)
+            {
+                system("cls");
+                printf("\nArchivo guardado correctamente.\n\n");
+                system("pause");
+            }
+            else
+            {
+                system("cls");
+                printf("\nNo se pudo cargar el archivo.\n\n");
+                system("pause");
+            }
+
             break;
 
         case 9:
-            controller_saveAsBinary("prueba.bin",listaEmpleados);
+            retorno=controller_saveAsBinary("prueba.bin",listaEmpleados);
+            if(retorno)
+            {
+                system("cls");
+                printf("\nArchivo guardado correctamente.\n\n");
+                system("pause");
+            }
+            else
+            {
+                system("cls");
+                printf("\nNo se pudo cargar el archivo.\n\n");
+                system("pause");
+            }
             break;
 
         case 10:
