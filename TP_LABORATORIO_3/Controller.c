@@ -216,13 +216,25 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
 {
     Employee* empleado;
     int i;
+    int flag=0;
 
     printf("ID    NOMBRE    HS TRABAJADAS   SUELDO");
     for(i=0;i<ll_len(pArrayListEmployee);i++)
     {
+
+        if(i %250 == 0)
+        {
+            printf("\nLista de empleados muy larga, se mostraran de 250 empleados por vez.");
+            printf("\n\n");
+            system("pause");
+
+        }
         empleado=ll_get(pArrayListEmployee,i);
         mostrarEmpleados(empleado);
+
+
     }
+    printf("FIN DE LA LISTA");
     printf("\n\n");
     system("pause");
     return 1;
@@ -258,11 +270,13 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
         ordenamiento=validarIntEntreRangos(entrada,0,1);
         if(ordenamiento==0)
         {
+            printf("ESPERE, ESTO PUEDE DEMORAR UNOS SEGUNDOS.");
             ll_sort(clonLinked,employee_CompareById,0);
             retorno=1;
         }
         else
         {
+            printf("ESPERE, ESTO PUEDE DEMORAR UNOS SEGUNDOS.");
             ll_sort(clonLinked,employee_CompareById,1);
             retorno=1;
         }
@@ -277,11 +291,13 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
         ordenamiento=validarIntEntreRangos(entrada,0,1);
         if(ordenamiento==0)
         {
+            printf("ESPERE, ESTO PUEDE DEMORAR UNOS SEGUNDOS.");
             ll_sort(clonLinked,employee_CompareByName,0);
             retorno=1;
         }
         else
         {
+            printf("ESPERE, ESTO PUEDE DEMORAR UNOS SEGUNDOS.");
             ll_sort(clonLinked,employee_CompareByName,1);
             retorno=1;
         }
@@ -291,13 +307,8 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
     }
 
     system("cls");
-    printf("ID    NOMBRE    HS TRABAJADAS   SUELDO");
-    for(int i=0; i<ll_len(clonLinked); i++)
-    {
-        empleado=ll_get(clonLinked,i);
-        mostrarEmpleados(empleado);
-    }
-    system("pause");
+
+    controller_ListEmployee(clonLinked);
 
     return retorno;
 }
