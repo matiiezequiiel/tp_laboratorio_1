@@ -28,45 +28,54 @@ int parser_EmployeeFromText(FILE* pFile, LinkedList* pArrayListEmployee)
 
 int parser_EmployeeFromBinary(FILE* pFile, LinkedList* pArrayListEmployee)
 {
-
     Employee* auxEmployee;
-    int retorno=1;
     int cant;
 
-
-        auxEmployee= employee_new();
-        if(auxEmployee!=NULL)
-            {
-            cant = fread(auxEmployee, sizeof(Employee), 1, pFile);
-            ll_add(pArrayListEmployee, auxEmployee);
-
-            }
-
-
-
-
-
-
-
-  /*   while(!feof(pFile))
+    while(!feof(pFile)&&pArrayListEmployee!=NULL)
     {
-        auxEmployee= employee_new();
-        if(auxEmployee!=NULL){
-            cant = fread(auxEmployee, sizeof(Employee), 1, pFile);
+        auxEmployee=employee_new();
 
-            if(cant<1)
-            {
-                if(!feof(pFile))
-                    retorno=0;
-                break;
-            }
-            if(ll_add(pArrayListEmployee, auxEmployee) == 0)
-            {
 
-                retorno=1;
-            }
+        if (fread(auxEmployee,sizeof(Employee),1,pFile)==1)
+        {
+            ll_add(pArrayListEmployee,auxEmployee);
         }
-    }*/
-    return retorno;
+
+
+    }
+
+    free(pFile);
+
+    return 1;
+
+
+
+
+
+   /* Employee* auxEmployee;
+    int retorno=1;
+    int cant;
+    int cont=0;
+
+
+       // auxEmployee= employee_new();
+        if(auxEmployee!=NULL)
+        {
+            while(!feof(pFile))
+            {
+                auxEmployee= employee_new();
+                cant = fread(auxEmployee, sizeof(Employee), 1, pFile);
+                printf("%d\n",cant);
+                printf("%s\n",auxEmployee->nombre);
+                system("pause");
+                ll_add(pArrayListEmployee, auxEmployee);
+                cont++;
+            }
+
+
+        }
+
+
+    return retorno;*/
 
 }

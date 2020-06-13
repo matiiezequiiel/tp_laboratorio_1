@@ -15,6 +15,8 @@ int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
     char cabeceraNombre[20];
     char cabeceraHsTrabajadas[20];
     char cabeceraSueldo[20];
+    int cont=0;
+    int prueba=0;
 
 
     fileArchivo=fopen(path,"r");
@@ -24,7 +26,11 @@ int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
     while(!feof(fileArchivo))
     {
         parser_EmployeeFromText(fileArchivo,pArrayListEmployee);
+        cont++;
     }
+    prueba=ll_len(pArrayListEmployee);
+    printf("%d---%d",cont,prueba);
+    system("pause");
 
     fclose(fileArchivo);
 
@@ -35,35 +41,28 @@ int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
 int controller_loadFromBinary(char* path, LinkedList* pArrayListEmployee)
 {
     int retorno = 0;
+    int prueba=0;
     FILE* f;
+    int cont=0;
 
-    f = fopen(path,"r+b");
+
+    f = fopen(path,"rb");
+
 
     if(f != NULL)
     {
-        while(!feof(f))
-        {
+     //   while(!feof(f))
+       // {
             parser_EmployeeFromBinary(f,pArrayListEmployee);
-        }
+        //    cont++;
+        //}
     }
+    prueba=ll_len(pArrayListEmployee);
+    printf("%d",cont);
+    system("pause");
+    fclose(f);
 
-    /*if( f != NULL)
-    {
-        if(parser_EmployeeFromBinary(f,pArrayListEmployee) != 0)
-        {
-            printf("\nCarga correcta.!! \n");
-            retorno = 1;
-        }else
-        {
-            retorno = 0;
-            printf("\nLa carga del archivo no fue correcta.\n");
-        }
 
-    }else
-    {
-        printf("\nEl archivo no se pudo abrir correctamente.\n");
-        retorno = 0;
-    }*/
 
     return retorno;
 
@@ -189,6 +188,40 @@ return 1;
 
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
 {
+    char entrada[10];
+    LinkedList* clonLinked;
+    Employee* empleado;
+    int opcion;
+
+    clonLinked=ll_clone(pArrayListEmployee);
+
+    printf("Ingrese opcion 1 para ordenar por ID.\n");
+    printf("Ingrese opcion 2 para ordenar por nombre.\n\n");
+    printf("Opcion elegida:");
+
+    scanf("%d",&opcion);
+
+
+    switch(opcion)
+    {
+    case 1:
+        ll_sort(clonLinked,employee_CompareById,0);
+        break;
+    case 2:
+        ll_sort(clonLinked,employee_CompareByName,0);
+        break;
+    default:
+        break;
+    }
+
+    printf("ID    NOMBRE    HS TRABAJADAS   SUELDO");
+    for(int i=0; i<ll_len(clonLinked); i++)
+    {
+        empleado=ll_get(clonLinked,i);
+        mostrarEmpleados(empleado);
+    }
+
+
 return 1;
 }
 
@@ -224,18 +257,28 @@ return 1;
 int controller_saveAsBinary(char* path, LinkedList* pArrayListEmployee)
 {
     FILE* fileBinary;
-    Employee p;
+    Employee* p;
     int i ;
+    int cont=0;
+    int lenght;
+
+    lenght=ll_len(pArrayListEmployee);
+    printf("%d\n",lenght);
+    system("pause");
 
     fileBinary=fopen(path,"wb");
 
     if(fileBinary!=NULL)
     {
+
         for(i=0;i<ll_len(pArrayListEmployee);i++)
         {
-            p = ll_get(pArrayListEmployee,i);
+            p =(Employee*)ll_get(pArrayListEmployee,i);
             fwrite(p,sizeof(Employee),1,fileBinary);
+            cont++;
         }
+        printf("%d",cont);
+        system("pause");
         fclose(fileBinary);
     }
 return 1;

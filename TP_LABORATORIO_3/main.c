@@ -38,11 +38,11 @@ int main()
         switch(opcion)
         {
         case 1:
-            controller_loadFromText("data.csv",listaEmpleados);
+            controller_loadFromText("prueba.csv",listaEmpleados);
             break;
 
         case 2:
-            controller_loadFromBinary("data.bin",listaEmpleados);
+            controller_loadFromBinary("nuevo.bin",listaEmpleados);
             break;
 
         case 3:
@@ -82,6 +82,7 @@ int main()
             break;
 
         case 7:
+            controller_sortEmployee(listaEmpleados);
             break;
 
         case 8:
