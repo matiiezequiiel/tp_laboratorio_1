@@ -112,7 +112,6 @@ int validarCadena(char cadenaValidar[])
 void formatearNombres (char* nombre)
 {
     char apellidoNombre[30];
-    int i;
 
     strlwr(nombre);
   //  strlwr(apellido);

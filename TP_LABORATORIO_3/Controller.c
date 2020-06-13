@@ -4,7 +4,9 @@
 #include "LinkedList.h"
 #include "Employee.h"
 #include "parser.h"
-
+#include "Validaciones.h"
+#include "Funciones.h"
+#include "Controller.h"
 
 
 int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
@@ -82,7 +84,6 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
 {
     Employee* nuevoEmpleado;
     char entrada[20];  //VALIDAR
-    char nombre[20];
     int hs;
     int sueldo;
     char confirmacion;
@@ -153,14 +154,17 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
         {
             printf("ENCONTRADO\n");
             system("pause");
-            menuModificaciones(pArrayListEmployee,empleado,i);
+            if(menuModificaciones(pArrayListEmployee,empleado,i))
+            {
+                retorno=1;
+            }
 
         }
 
     }
 
 
-    return 1;
+    return retorno;
 }
 
 
@@ -171,6 +175,7 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
     int idArray;
     int idEliminar;
     int retorno=0;
+    char opcion;
 
     Employee* empleado;
 
@@ -189,8 +194,16 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
             printf("ENCONTRADO\n");
             system("pause");
             printf("\n\n");
-            ll_remove(pArrayListEmployee,i);
-            retorno=1;
+            printf("Ingrese S para confirmar, N para salir: ");
+            fflush(stdin);
+            scanf("%c",&opcion);
+            opcion=toupper(opcion);
+
+            if(opcion=='S')
+            {
+                ll_remove(pArrayListEmployee,i);
+                retorno=1;
+            }
             break;
         }
 
@@ -312,4 +325,93 @@ int controller_saveAsBinary(char* path, LinkedList* pArrayListEmployee)
     }
     return 1;
 }
+
+int menuModificaciones(LinkedList* listaEmpleados,void* empleado,int index)
+{
+    int opcion;
+    char entrada[10];
+    int nuevasHs;
+    int nuevoSueldo;
+    char confirmacion;
+    int retorno=0;
+
+    system("cls");
+    printf("MENU DE MODIFICACIONES.\n\n");
+    printf("1.Modificar nombre.\n");
+    printf("2.Modificar hs trabajadas.\n");
+    printf("3.Modificar sueldo.\n\n");
+    printf("Ingrese opcion: ");
+
+    fflush(stdin);
+    gets(entrada);
+    opcion=getInt(entrada);
+
+    switch(opcion)
+    {
+    case 1:
+
+        printf("Ingrese nuevo nombre: ");
+        fflush(stdin);
+        gets(entrada);
+        formatearNombres(entrada);
+        while(!validarCadena(entrada))
+        {
+            printf("Nombre invalido, reeingrese: ");
+            fflush(stdin);
+            gets(entrada);
+            formatearNombres(entrada);
+            validarCadena(entrada);
+        }
+        printf("\nS confirma modificacion, N cancela modificacion:");
+        scanf("%c",&confirmacion);
+
+        confirmacion=toupper(confirmacion);
+
+        if(confirmacion=='S')
+        {
+              employee_setNombre(empleado,entrada);
+              retorno=1;
+        }
+        break;
+
+    case 2:
+        printf("\nIngrese nuevas HS: ");
+        gets(entrada);
+        nuevasHs=getInt(entrada);
+        printf("\nS confirma modificacion, N cancela modificacion: ");
+        scanf("%c",&confirmacion);
+
+        confirmacion=toupper(confirmacion);
+
+        if(confirmacion=='S')
+        {
+            employee_setHorasTrabajadas(empleado,nuevasHs);
+            retorno=1;
+        }
+        break;
+    case 3:
+        printf("\nIngrese nuevo sueldo: ");
+        gets(entrada);
+        nuevoSueldo=getInt(entrada);
+        printf("\nS confirma modificacion, N cancela modificacion: ");
+        scanf("%c",&confirmacion);
+
+        confirmacion=toupper(confirmacion);
+
+        if(confirmacion=='S')
+        {
+             employee_setSueldo(empleado,nuevoSueldo);
+             retorno=1;
+        }
+
+        break;
+    }
+
+    ll_set(listaEmpleados,index,empleado);
+
+
+return retorno;
+
+}
+
 

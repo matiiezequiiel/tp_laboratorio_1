@@ -100,17 +100,24 @@ int employee_CompareByName(Employee* e1, Employee* e2)
 {
     //verificar nulidad
 
-    return strcmp(e1->nombre, e2->nombre);
+    if(e1 != NULL && e2 != NULL)
+    {
+
+    }
+ return strcmp(e1->nombre, e2->nombre);
+
 }
 
 int employee_CompareById(Employee* e1, Employee* e2)
 {
     //verificar nulidad
-
-    if(e1->id > e2->id)
+     if(e1 != NULL && e2 != NULL)
     {
-        return 1;
-    }
+
+        if(e1->id > e2->id)
+        {
+            return 1;
+        }
     else
     {
         if(e1->id < e2->id)
@@ -124,6 +131,8 @@ int employee_CompareById(Employee* e1, Employee* e2)
     }
 
 
+
+    }
 
     return strcmp(e1->nombre, e2->nombre);
 }
@@ -146,95 +155,6 @@ void mostrarEmpleados(Employee* empleado)
     printf("%s     \t",nombre);
     printf("%d  \t",hs);
     printf("%d\n",sueldo);
-
-}
-
-int menuModificaciones(LinkedList* listaEmpleados,Employee* empleado,int index)
-{
-    int opcion;
-    char entrada[10];
-    char nuevoNombre[20];
-    int nuevasHs;
-    int nuevoSueldo;
-    char confirmacion;
-
-    system("cls");
-    printf("MENU DE MODIFICACIONES.\n\n");
-    printf("1.Modificar nombre.\n");
-    printf("2.Modificar hs trabajadas.\n");
-    printf("3.Modificar sueldo.\n\n");
-    printf("Ingrese opcion: ");
-
-    fflush(stdin);
-    gets(entrada);
-    opcion=getInt(entrada);
-
-    switch(opcion)
-    {
-    case 1:
-
-        printf("Ingrese nuevo nombre: ");
-        fflush(stdin);
-        gets(entrada);
-        formatearNombres(entrada);
-        while(!validarCadena(entrada))
-        {
-            printf("Nombre invalido, reeingrese: ");
-            fflush(stdin);
-            gets(entrada);
-            formatearNombres(entrada);
-            validarCadena(entrada);
-        }
-        printf("\nS confirma modificacion, N cancela modificacion:");
-        scanf("%c",&confirmacion);
-
-        confirmacion=toupper(confirmacion);
-
-        if(confirmacion=='S')
-        {
-              employee_setNombre(empleado,entrada);
-        }
-        break;
-
-    case 2:
-        printf("\nIngrese nuevas HS: ");
-        gets(entrada);
-        nuevasHs=getInt(entrada);
-        printf("\nS confirma modificacion, N cancela modificacion.");
-        scanf("%c",&confirmacion);
-
-        confirmacion=toupper(confirmacion);
-
-        if(confirmacion=='S')
-        {
-            employee_setHorasTrabajadas(empleado,nuevasHs);
-        }
-        break;
-    case 3:
-        printf("\nIngrese nuevo sueldo: ");
-        gets(entrada);
-        nuevoSueldo=getInt(entrada);
-        printf("\nS confirma modificacion, N cancela modificacion.");
-        scanf("%c",&confirmacion);
-
-        confirmacion=toupper(confirmacion);
-
-        if(confirmacion=='S')
-        {
-             employee_setSueldo(empleado,nuevoSueldo);
-        }
-
-        break;
-    }
-
-    ll_set(listaEmpleados,index,empleado);
-
-
-
-
-
-
-
 
 }
 

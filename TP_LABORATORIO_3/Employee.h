@@ -27,4 +27,6 @@ int employee_getSueldo(Employee* this,int* sueldo);
 int employee_CompareByName(Employee* e1, Employee* e2);
 int employee_CompareById(Employee* e1, Employee* e2);
 
+void mostrarEmpleados(Employee* empleado);
+
 #endif // employee_H_INCLUDED
