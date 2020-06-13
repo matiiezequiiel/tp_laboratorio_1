@@ -24,6 +24,7 @@ int main()
 {
     LinkedList* listaEmpleados;
     Employee* empleado;
+    int retorno;
     int lenght;
     int i;
 
@@ -33,16 +34,41 @@ int main()
 
     do
     {
+        system("cls");
         opcion=mostrarMenuABM();
 
         switch(opcion)
         {
         case 1:
-            controller_loadFromText("prueba.csv",listaEmpleados);
+            retorno=controller_loadFromText("prueba.csv",listaEmpleados);
+            if(retorno)
+            {
+                system("cls");
+                printf("\nArchivo cargado correctamente.\n\n");
+                system("pause");
+            }
+            else
+            {
+                system("cls");
+                printf("\nNo se pudo cargar el archivo.\n\n");
+                system("pause");
+            }
             break;
 
         case 2:
-            controller_loadFromBinary("nuevo.bin",listaEmpleados);
+            retorno=controller_loadFromBinary("prueba.bin",listaEmpleados);
+             if(retorno)
+            {
+                system("cls");
+                printf("\nArchivo cargado correctamente.\n\n");
+                system("pause");
+            }
+            else
+            {
+                system("cls");
+                printf("\nNo se pudo cargar el archivo.\n\n");
+                system("pause");
+            }
             break;
 
         case 3:
@@ -79,6 +105,8 @@ int main()
                 empleado=ll_get(listaEmpleados,i);
                 mostrarEmpleados(empleado);
             }
+            printf("\n\n");
+            system("pause");
             break;
 
         case 7:
@@ -86,11 +114,11 @@ int main()
             break;
 
         case 8:
-            controller_saveAsText("nuevo.csv",listaEmpleados);
+            controller_saveAsText("prueba.csv",listaEmpleados);
             break;
 
         case 9:
-            controller_saveAsBinary("nuevo.bin",listaEmpleados);
+            controller_saveAsBinary("prueba.bin",listaEmpleados);
             break;
 
         case 10:
