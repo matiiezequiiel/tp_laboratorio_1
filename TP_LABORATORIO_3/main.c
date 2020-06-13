@@ -38,7 +38,7 @@ int main()
         switch(opcion)
         {
         case 1:
-            retorno=controller_loadFromText("prueba.csv",listaEmpleados);
+            retorno=controller_loadFromText("data.csv",listaEmpleados);
             if(!archivoCargado)
             {
                 if(retorno)
@@ -66,7 +66,7 @@ int main()
             break;
 
         case 2:
-            retorno=controller_loadFromBinary("prueba.bin",listaEmpleados);
+            retorno=controller_loadFromBinary("data.bin",listaEmpleados);
             if(!archivoCargado)
             {
                  if(retorno)
@@ -154,7 +154,7 @@ int main()
             break;
 
         case 8:
-            retorno=controller_saveAsText("prueba.csv",listaEmpleados);
+            retorno=controller_saveAsText("data.csv",listaEmpleados);
             if(retorno)
             {
                 system("cls");
@@ -171,7 +171,7 @@ int main()
             break;
 
         case 9:
-            retorno=controller_saveAsBinary("prueba.bin",listaEmpleados);
+            retorno=controller_saveAsBinary("data.bin",listaEmpleados);
             if(retorno)
             {
                 system("cls");
