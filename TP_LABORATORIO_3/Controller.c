@@ -81,30 +81,55 @@ int controller_loadFromBinary(char* path, LinkedList* pArrayListEmployee)
 int controller_addEmployee(LinkedList* pArrayListEmployee)
 {
     Employee* nuevoEmpleado;
-    int id=25;
+    char entrada[20];  //VALIDAR
+    char nombre[20];
     int hs;
     int sueldo;
-    char entrada[20];  //VALIDAR
+    char confirmacion;
+    int retorno=0;
 
     nuevoEmpleado=employee_new();
 
-    employee_setId(nuevoEmpleado,id);
+    employee_setId(nuevoEmpleado,ll_len(pArrayListEmployee)+1);
     printf("Ingrese nombre del empleado: ");
-    gets(entrada);
+    gets(entrada); //validarNombre;
+    formatearNombres(entrada);
+    while(!validarCadena(entrada))
+    {
+        printf("Nombre invalido, reeingrese: ");
+        fflush(stdin);
+        gets(entrada);
+        formatearNombres(entrada);
+        validarCadena(entrada);
+    }
     employee_setNombre(nuevoEmpleado,entrada);
+
     printf("Ingrese hs trabajadas: ");
-    scanf("%d",&hs);
+    gets(entrada);
+    hs=getInt(entrada);
     employee_setHorasTrabajadas(nuevoEmpleado,hs);
+
     printf("Ingrese sueldo: ");
-    scanf("%d",&sueldo);
+    gets(entrada);
+    sueldo=getInt(entrada);
     employee_setSueldo(nuevoEmpleado,sueldo);
 
-    ll_add(pArrayListEmployee,nuevoEmpleado);
+    printf("\n\nIngrese S para confirmar, N para salir.");
+    printf("\n\nOpcion ingresada: ");
+    scanf("%c",&confirmacion);
+    confirmacion=toupper(confirmacion);
 
+    if(confirmacion=='S')
+    {
+         ll_add(pArrayListEmployee,nuevoEmpleado);
+         retorno=1;
+    }
+    else
+    {
+        retorno=0;
+    }
 
-
-
-    return 1;
+    return retorno;
 }
 
 
@@ -112,19 +137,14 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 {
     int idModificar;
     int idArray;
-    int lenght;
     int i;
-    char nuevoNombre[20];
-    int nuevasHs;
-    int nuevoSueldo;
     Employee* empleado;
+    int retorno=0;
 
     printf("Ingrese el id a modificar: ");
     scanf("%d",&idModificar);
 
-    lenght=ll_len(pArrayListEmployee);
-
-    for(i=0; i<lenght; i++)
+    for(i=0; i<ll_len(pArrayListEmployee); i++)
     {
         empleado=ll_get(pArrayListEmployee,i);
         employee_getId(empleado,&idArray);
@@ -133,18 +153,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
         {
             printf("ENCONTRADO\n");
             system("pause");
-            printf("\n\n");
-            printf("Ingrese nuevo nombre: ");
-            fflush(stdin);
-            gets(nuevoNombre);
-            printf("\nIngrese nuevas HS: ");
-            scanf("%d",&nuevasHs);
-            printf("\nIngrese nuevo sueldo: ");
-            scanf("%d",&nuevoSueldo);
-            employee_setNombre(empleado,nuevoNombre);
-            employee_setHorasTrabajadas(empleado,nuevasHs);
-            employee_setSueldo(empleado,nuevoSueldo);
-            ll_set(pArrayListEmployee,i,empleado);
+            menuModificaciones(pArrayListEmployee,empleado,i);
 
         }
 
@@ -192,6 +201,17 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
 
 int controller_ListEmployee(LinkedList* pArrayListEmployee)
 {
+    Employee* empleado;
+    int i;
+
+    printf("ID    NOMBRE    HS TRABAJADAS   SUELDO");
+    for(i=0;i<ll_len(pArrayListEmployee);i++)
+    {
+        empleado=ll_get(pArrayListEmployee,i);
+        mostrarEmpleados(empleado);
+    }
+    printf("\n\n");
+    system("pause");
     return 1;
 }
 

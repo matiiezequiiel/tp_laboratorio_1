@@ -23,10 +23,8 @@
 int main()
 {
     LinkedList* listaEmpleados;
-    Employee* empleado;
     int retorno;
-    int lenght;
-    int i;
+    int archivoCargado=0;
 
     listaEmpleados=ll_newLinkedList();
 
@@ -41,58 +39,97 @@ int main()
         {
         case 1:
             retorno=controller_loadFromText("prueba.csv",listaEmpleados);
-            if(retorno)
+            if(!archivoCargado)
             {
-                system("cls");
-                printf("\nArchivo cargado correctamente.\n\n");
-                system("pause");
+                if(retorno)
+                {
+                    system("cls");
+                    printf("\nArchivo cargado correctamente.\n\n");
+                    system("pause");
+                    archivoCargado=1;
+                }
+                else
+                {
+                    system("cls");
+                    printf("\nNo se pudo cargar el archivo.\n\n");
+                    system("pause");
+                }
             }
             else
             {
                 system("cls");
-                printf("\nNo se pudo cargar el archivo.\n\n");
+                printf("El archivo ya fue cargado.\n\n");
                 system("pause");
+
             }
+
             break;
 
         case 2:
             retorno=controller_loadFromBinary("prueba.bin",listaEmpleados);
-             if(retorno)
+            if(!archivoCargado)
             {
-                system("cls");
-                printf("\nArchivo cargado correctamente.\n\n");
-                system("pause");
+                 if(retorno)
+                {
+                    system("cls");
+                    printf("\nArchivo cargado correctamente.\n\n");
+                    system("pause");
+                    archivoCargado=1;
+                }
+                else
+                {
+                    system("cls");
+                    printf("\nNo se pudo cargar el archivo.\n\n");
+                    system("pause");
+                }
             }
             else
             {
                 system("cls");
-                printf("\nNo se pudo cargar el archivo.\n\n");
+                printf("El archivo ya fue cargado.\n\n");
+                system("pause");
+
+            }
+
+            break;
+
+        case 3:
+            retorno=controller_addEmployee(listaEmpleados);
+            if(retorno)
+            {
+                system("cls");
+                printf("\nEmpleado cargado correctamente.\n\n");
+                system("pause");
+                archivoCargado=1;
+            }
+            else
+            {
+                system("cls");
+                printf("\nNo se pudo cargar el empleado.\n\n");
                 system("pause");
             }
             break;
 
-        case 3:
-            controller_addEmployee(listaEmpleados);
-            break;
-
         case 4:
-            lenght=ll_len(listaEmpleados);
-            printf("ID    NOMBRE    HS TRABAJADAS   SUELDO");
-            for(i=0;i<lenght;i++)
+            controller_ListEmployee(listaEmpleados);
+            retorno=controller_editEmployee(listaEmpleados);
+            if(retorno)
             {
-                empleado=ll_get(listaEmpleados,i);
-                mostrarEmpleados(empleado);
+                system("cls");
+                printf("\nEmpleado editado correctamente.\n\n");
+                system("pause");
+                archivoCargado=1;
             }
-            controller_editEmployee(listaEmpleados);
+            else
+            {
+                system("cls");
+                printf("\nNo se pudo editar el empleado.\n\n");
+                system("pause");
+            }
             break;
 
         case 5:
-            printf("ID    NOMBRE    HS TRABAJADAS   SUELDO");
-            for(i=0;i<ll_len(listaEmpleados);i++)
-            {
-                empleado=ll_get(listaEmpleados,i);
-                mostrarEmpleados(empleado);
-            }
+            controller_ListEmployee(listaEmpleados);
             retorno=controller_removeEmployee(listaEmpleados);
             if(retorno)
             {
@@ -109,15 +146,7 @@ int main()
             break;
 
         case 6:
-            lenght=ll_len(listaEmpleados);
-            printf("ID    NOMBRE    HS TRABAJADAS   SUELDO");
-            for(i=0;i<lenght;i++)
-            {
-                empleado=ll_get(listaEmpleados,i);
-                mostrarEmpleados(empleado);
-            }
-            printf("\n\n");
-            system("pause");
+           controller_ListEmployee(listaEmpleados);
             break;
 
         case 7:

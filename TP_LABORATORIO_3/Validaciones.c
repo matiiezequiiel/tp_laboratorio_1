@@ -73,3 +73,61 @@ int validarEntero (char* numeroValidar)
     return retorno;
 
 }
+int validarCadena(char cadenaValidar[])
+{
+    int retorno=0;
+    int lenght;
+    int i;
+    int contadorEspacios=0;
+
+    lenght=strlen(cadenaValidar);
+
+    for(i=0;i<lenght;i++)
+    {
+        if(cadenaValidar[i]==' ')
+        {
+            contadorEspacios++;
+        }
+
+        //if( (cadenaValidar[i]>='a' && cadenaValidar[i]<='z') || (cadenaValidar[i]>='A' && cadenaValidar[i]<='Z') || (contadorEspacios==0) || (lenght==0))
+        if( (cadenaValidar[i]>='a' && cadenaValidar[i]<='z') || (cadenaValidar[i]>='A' && cadenaValidar[i]<='Z') )
+        {
+             retorno=1;
+        }
+        else
+        {
+            retorno=0;
+            break;
+        }
+
+    }
+
+
+    return retorno;
+
+
+}
+
+//void formatearNombres (char* nombre,char* apellido)
+void formatearNombres (char* nombre)
+{
+    char apellidoNombre[30];
+    int i;
+
+    strlwr(nombre);
+  //  strlwr(apellido);
+    nombre[0]=toupper(nombre[0]);
+ //   apellido[0]=toupper(apellido[0]);
+
+  //  for(i=0;i<strlen(nombre);i++)
+  //  {
+  //      if(isspace(nombre[i]))
+  //          nombre[i+1]=toupper(nombre[i+1]);
+  //  }
+
+ //   strcpy(apellidoNombre, apellido);
+  //  strcat(apellidoNombre, ", ");
+  //  strcat(apellidoNombre, nombre);
+        strcpy(apellidoNombre, nombre);
+
+}

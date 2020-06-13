@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "Employee.h"
+#include "LinkedList.h"
 #include <string.h>
 
 Employee* employee_new()
@@ -90,8 +91,8 @@ int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas)
 int employee_getHorasTrabajadas(Employee* this,int* horasTrabajdas)
 {
 
-  *horasTrabajdas=this->horasTrabajadas;
-  return 1;
+    *horasTrabajdas=this->horasTrabajadas;
+    return 1;
 }
 
 
@@ -135,16 +136,105 @@ void mostrarEmpleados(Employee* empleado)
     int sueldo;
 
 
-   employee_getId(empleado,&id);
-   employee_getNombre(empleado,nombre);
-   employee_getHorasTrabajadas(empleado,&hs);
-   employee_getSueldo(empleado,&sueldo);
+    employee_getId(empleado,&id);
+    employee_getNombre(empleado,nombre);
+    employee_getHorasTrabajadas(empleado,&hs);
+    employee_getSueldo(empleado,&sueldo);
 
-   printf("\n");
-   printf("%d\t",id);
-   printf("%s     \t",nombre);
-   printf("%d  \t",hs);
-   printf("%d\n",sueldo);
+    printf("\n");
+    printf("%d\t",id);
+    printf("%s     \t",nombre);
+    printf("%d  \t",hs);
+    printf("%d\n",sueldo);
+
+}
+
+int menuModificaciones(LinkedList* listaEmpleados,Employee* empleado,int index)
+{
+    int opcion;
+    char entrada[10];
+    char nuevoNombre[20];
+    int nuevasHs;
+    int nuevoSueldo;
+    char confirmacion;
+
+    system("cls");
+    printf("MENU DE MODIFICACIONES.\n\n");
+    printf("1.Modificar nombre.\n");
+    printf("2.Modificar hs trabajadas.\n");
+    printf("3.Modificar sueldo.\n\n");
+    printf("Ingrese opcion: ");
+
+    fflush(stdin);
+    gets(entrada);
+    opcion=getInt(entrada);
+
+    switch(opcion)
+    {
+    case 1:
+
+        printf("Ingrese nuevo nombre: ");
+        fflush(stdin);
+        gets(entrada);
+        formatearNombres(entrada);
+        while(!validarCadena(entrada))
+        {
+            printf("Nombre invalido, reeingrese: ");
+            fflush(stdin);
+            gets(entrada);
+            formatearNombres(entrada);
+            validarCadena(entrada);
+        }
+        printf("\nS confirma modificacion, N cancela modificacion:");
+        scanf("%c",&confirmacion);
+
+        confirmacion=toupper(confirmacion);
+
+        if(confirmacion=='S')
+        {
+              employee_setNombre(empleado,entrada);
+        }
+        break;
+
+    case 2:
+        printf("\nIngrese nuevas HS: ");
+        gets(entrada);
+        nuevasHs=getInt(entrada);
+        printf("\nS confirma modificacion, N cancela modificacion.");
+        scanf("%c",&confirmacion);
+
+        confirmacion=toupper(confirmacion);
+
+        if(confirmacion=='S')
+        {
+            employee_setHorasTrabajadas(empleado,nuevasHs);
+        }
+        break;
+    case 3:
+        printf("\nIngrese nuevo sueldo: ");
+        gets(entrada);
+        nuevoSueldo=getInt(entrada);
+        printf("\nS confirma modificacion, N cancela modificacion.");
+        scanf("%c",&confirmacion);
+
+        confirmacion=toupper(confirmacion);
+
+        if(confirmacion=='S')
+        {
+             employee_setSueldo(empleado,nuevoSueldo);
+        }
+
+        break;
+    }
+
+    ll_set(listaEmpleados,index,empleado);
+
+
+
+
+
+
+
 
 }
 
