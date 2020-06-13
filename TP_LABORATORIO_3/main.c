@@ -87,14 +87,25 @@ int main()
             break;
 
         case 5:
-            lenght=ll_len(listaEmpleados);
             printf("ID    NOMBRE    HS TRABAJADAS   SUELDO");
-            for(i=0;i<lenght;i++)
+            for(i=0;i<ll_len(listaEmpleados);i++)
             {
                 empleado=ll_get(listaEmpleados,i);
                 mostrarEmpleados(empleado);
             }
-            controller_removeEmployee(listaEmpleados);
+            retorno=controller_removeEmployee(listaEmpleados);
+            if(retorno)
+            {
+                system("cls");
+                printf("\nEmpleado eliminado correctamente.\n\n");
+                system("pause");
+            }
+            else
+            {
+                system("cls");
+                printf("\nNo se pudo eliminar al empleado.\n\n");
+                system("pause");
+            }
             break;
 
         case 6:

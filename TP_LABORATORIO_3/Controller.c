@@ -161,6 +161,7 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
     int i;
     int idArray;
     int idEliminar;
+    int retorno=0;
 
     Employee* empleado;
 
@@ -180,10 +181,12 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
             system("pause");
             printf("\n\n");
             ll_remove(pArrayListEmployee,i);
+            retorno=1;
+            break;
         }
 
     }
-    return 1;
+    return retorno;
 }
 
 
