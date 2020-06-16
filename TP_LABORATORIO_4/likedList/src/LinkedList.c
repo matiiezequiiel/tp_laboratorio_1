@@ -3,7 +3,7 @@
 #include <string.h>
 #include "../inc/LinkedList.h"
 
-/** \brief  OBTIENE UN NODO DE LA LISTA
+/** \brief  OBTIENE UN NODO DE LA LISTA PREUBAAAAAAAAAAA
  *
  * \param this LinkedList* PUNTERO A LA LISTA
  * \param index int INDICE DEL NODO A OBTENER
