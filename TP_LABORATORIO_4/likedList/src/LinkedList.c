@@ -223,13 +223,10 @@ int ll_remove(LinkedList* this,int index)
 
 int ll_clear(LinkedList* this)
 {
-    Node* pNodo=NULL;
     int retorno=-1;
 
     if(this != NULL)
     {
-        pNodo=this->pFirstNode;
-
         for(int i=0;i<ll_len(this);i++)
         {
             ll_remove(this,i);
@@ -244,18 +241,65 @@ int ll_clear(LinkedList* this)
 
 int ll_deleteLinkedList(LinkedList* this)
 {
+    int retorno=-1;
+
+    if(this != NULL)
+    {
+        free(this);
+        retorno=0;
+    }
+    return retorno;
 
 }
 
 
 int ll_indexOf(LinkedList* this, void* pElement)
 {
+    int retorno=-1;
+    Node* pNodo=NULL;
+
+    if(this != NULL )
+    {
+        pNodo=this->pFirstNode;
+
+        for(int i=0;i<ll_len(this);i++)
+        {
+            if(pNodo->pElement != pElement)
+            {
+                pNodo=pNodo->pNextNode;
+
+            }
+            else
+            {
+                retorno=i;
+            }
+
+        }
+
+    }
+
+    return retorno;
 
 }
 
 
 int ll_isEmpty(LinkedList* this)
 {
+    int retorno=-1;
+
+    if(this != NULL)
+    {
+        if(ll_len(this)==0)
+        {
+            retorno=1;
+        }
+        else
+        {
+            retorno=0;
+        }
+
+    }
+    return retorno;
 
 }
 
@@ -263,11 +307,25 @@ int ll_isEmpty(LinkedList* this)
 int ll_push(LinkedList* this, int index, void* pElement)
 {
 
+    return addNode(this,index,pElement);
+
 }
 
 
 void* ll_pop(LinkedList* this,int index)
 {
+    void* pElement= NULL;
+    Node* pNode=NULL;
+
+    if( this != NULL && index>=0 && index<ll_len(this) )
+    {
+        pNode=getNode(this,index);
+        pElement=pNode->pElement;
+        ll_remove(this,index);
+
+    }
+
+    return pElement;
 
 }
 
@@ -275,10 +333,81 @@ void* ll_pop(LinkedList* this,int index)
 int ll_contains(LinkedList* this, void* pElement)
 {
 
+    int retorno=-1;
+    Node* pNodo=NULL;
+    int lenght;
+
+    if(this != NULL )
+    {
+        if(ll_len(this)==0)
+        {
+            retorno=0;
+
+        }
+
+        pNodo=this->pFirstNode;
+        for(int i=0;i<ll_len(this);i++)
+        {
+            if(pNodo->pElement != pElement)
+            {
+                pNodo=pNodo->pNextNode;
+                retorno=0;
+
+            }
+            else
+            {
+                retorno=1;
+                break;
+
+            }
+
+        }
+
+    }
+
+    return retorno;
+
+
 }
 
 int ll_containsAll(LinkedList* this,LinkedList* this2)
 {
+    int retorno=-1;
+    Node* pNodoThis=NULL;
+    Node* pNodoThis2=NULL;
+
+    if(this != NULL && this2 != NULL)
+    {
+        if(ll_len(this) >= ll_len(this2) && ll_len(this)>0 && ll_len(this2)>0) //SI LA LISTA 2 ES MAYOR NO PUEDE ESTAR CONTENIDA TODA EN LA LISTA 1.
+        {
+            pNodoThis=this->pFirstNode;
+            for(int i=0;i<ll_len(this);i++)
+            {
+                pNodoThis2=this2->pFirstNode;
+                for(int j=0;j<ll_len(this2);j++)
+                {
+                    if(pNodoThis->pElement != pNodoThis2->pElement)
+                    {
+                        pNodoThis2=pNodoThis2->pNextNode;
+                    }
+                    else
+                    {
+                        retorno=1;
+                        break;
+                    }
+                    retorno=0;
+
+                }
+                if(retorno==0)
+                {
+                    break;
+                }
+                pNodoThis=pNodoThis->pNextNode;
+            }
+
+        }
+    }
+    return retorno;
 
 }
 
