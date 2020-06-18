@@ -378,34 +378,37 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
 
     if(this != NULL && this2 != NULL)
     {
-        if(ll_len(this) >= ll_len(this2) && ll_len(this)>0 && ll_len(this2)>0) //SI LA LISTA 2 ES MAYOR NO PUEDE ESTAR CONTENIDA TODA EN LA LISTA 1.
+        if(ll_len(this) >= ll_len(this2) || ll_len(this)>0 || ll_len(this2)>0) //SI LA LISTA 2 ES MAYOR NO PUEDE ESTAR CONTENIDA TODA EN LA LISTA 1.
+        {
+            retorno=0;
+        }
+
+        pNodoThis2=this2->pFirstNode;
+        for(int i=0;i<ll_len(this2);i++)
         {
             pNodoThis=this->pFirstNode;
-            for(int i=0;i<ll_len(this);i++)
+            for(int j=0;j<ll_len(this);j++)
             {
-                pNodoThis2=this2->pFirstNode;
-                for(int j=0;j<ll_len(this2);j++)
+                if(pNodoThis2->pElement != pNodoThis->pElement)
                 {
-                    if(pNodoThis->pElement != pNodoThis2->pElement)
-                    {
-                        pNodoThis2=pNodoThis2->pNextNode;
-                    }
-                    else
-                    {
-                        retorno=1;
-                        break;
-                    }
-                    retorno=0;
-
+                    pNodoThis=pNodoThis->pNextNode;
                 }
-                if(retorno==0)
+                else
                 {
+                    retorno=1;
                     break;
                 }
-                pNodoThis=pNodoThis->pNextNode;
-            }
+                retorno=0;
 
+            }
+            if(retorno==0)
+            {
+                break;
+            }
+            pNodoThis2=pNodoThis2->pNextNode;
         }
+
+
     }
     return retorno;
 
