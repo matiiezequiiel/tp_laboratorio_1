@@ -335,7 +335,6 @@ int ll_contains(LinkedList* this, void* pElement)
 
     int retorno=-1;
     Node* pNodo=NULL;
-    int lenght;
 
     if(this != NULL )
     {
@@ -417,6 +416,31 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
 
 LinkedList* ll_subList(LinkedList* this,int from,int to)
 {
+    LinkedList* pNuevall=NULL;
+    Node* pAuxNodo=NULL;
+    int j=0;
+    void* auxElement=NULL;
+
+
+    if(this != NULL && (from>=0 && from<ll_len(this)) && (to>= from && to<=ll_len(this)) )
+    {
+        pNuevall=ll_newLinkedList();
+
+        for(int i=0;i<ll_len(this);i++)
+        {
+            pAuxNodo=getNode(this,i);
+            auxElement=pAuxNodo->pElement;
+
+            if(i==from || j<to)
+            {
+                addNode(pNuevall,j,auxElement);
+                j++;
+            }
+
+        }
+
+    }
+    return pNuevall;
 
 }
 
