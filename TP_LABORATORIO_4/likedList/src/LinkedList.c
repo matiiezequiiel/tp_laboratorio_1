@@ -448,6 +448,27 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
 LinkedList* ll_clone(LinkedList* this)
 {
 
+    LinkedList* pNuevall=NULL;
+    Node* pAuxNodo=NULL;
+    void* auxElement=NULL;
+
+
+    if(this != NULL)
+    {
+        pNuevall=ll_newLinkedList();
+
+        for(int i=0;i<ll_len(this);i++)
+        {
+            pAuxNodo=getNode(this,i);
+            auxElement=pAuxNodo->pElement;
+            addNode(pNuevall,i,auxElement);
+
+        }
+
+    }
+    return pNuevall;
+
+
 }
 
 
