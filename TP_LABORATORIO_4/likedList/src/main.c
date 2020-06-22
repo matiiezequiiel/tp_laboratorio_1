@@ -25,8 +25,13 @@
 
 
 int main(void)
+<<<<<<< HEAD
 {
         /**FUNCIONES TESTING*/
+=======
+{
+        /**FUNCIONES TESTING*/
+>>>>>>> 765b5f569e3eca1e3793ba023b5893c9a36aa7d9
 
     //      startTesting(1);  // ll_newLinkedList
     //      startTesting(2);  // ll_len
