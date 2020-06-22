@@ -28,3 +28,31 @@
 	"ArrayEmployees.h"
 	"validaciones.h"
 
+1591979844 source:c:\users\matii\eclipse-workspace\tp laboratorio\tp_laboratorio_1\tp_laboratorio_2\arrayemployees.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<string.h>
+	<ctype.h>
+	"ArrayEmployees.h"
+	"validaciones.h"
+
+1591979844 c:\users\matii\eclipse-workspace\tp laboratorio\tp_laboratorio_1\tp_laboratorio_2\arrayemployees.h
+
+1591979844 c:\users\matii\eclipse-workspace\tp laboratorio\tp_laboratorio_1\tp_laboratorio_2\validaciones.h
+
+1591979844 source:c:\users\matii\eclipse-workspace\tp laboratorio\tp_laboratorio_1\tp_laboratorio_2\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ArrayEmployees.h"
+	"validaciones.h"
+
+1591979844 source:c:\users\matii\eclipse-workspace\tp laboratorio\tp_laboratorio_1\tp_laboratorio_2\validaciones.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<string.h>
+	<ctype.h>
+	"ArrayEmployees.h"
+	"validaciones.h"
+

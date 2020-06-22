@@ -19,12 +19,6 @@
 
 #ifndef __LINKEDLIST
 #define __LINKEDLIST
-=======
-*/
-
-#ifndef __LINKEDLIST
-#define __LINKEDLIST
->>>>>>> 765b5f569e3eca1e3793ba023b5893c9a36aa7d9
 /**ESTRUCTURA NODO*/
 struct Node
 {
@@ -33,7 +27,6 @@ struct Node
 }typedef Node;
 
 struct LinkedList
-<<<<<<< HEAD
 {
     Node* pFirstNode;   //PUNTERO AL PRIMERO NODO
     int size;           //TAMAÑO LINKEDLIST
@@ -226,12 +219,6 @@ LinkedList* ll_clone(LinkedList* this);
  * \return int RETORNA  (-1) ERROR: SI EL PUNTERO A LA LISTAS ES NULL
  *                      ( 0) SI OK
  */
-=======
-{
-    Node* pFirstNode;   //PUNTERO AL PRIMERO NODO
-    int size;           //TAMAÑO LINKEDLIST
-}typedef LinkedList;
-#endif
 
 //FUNCIONES PUBLICAS
 
@@ -419,5 +406,4 @@ LinkedList* ll_clone(LinkedList* this);
  * \return int RETORNA  (-1) ERROR: SI EL PUNTERO A LA LISTAS ES NULL
  *                      ( 0) SI OK
  */
->>>>>>> 765b5f569e3eca1e3793ba023b5893c9a36aa7d9
 int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order);
