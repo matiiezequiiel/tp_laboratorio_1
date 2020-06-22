@@ -474,60 +474,41 @@ LinkedList* ll_clone(LinkedList* this)
 
 int ll_sort(LinkedList* this, int (*pFunc)(void*,void*), int order)
 {
-    int lenght;
     int retorno=-1;
-    int retornoFuncion;
-    void* aux=NULL;
-    void* aux1=NULL;
+    int lenght;
+    void* aux;
 
     lenght=ll_len(this);
 
-
-    if(this != NULL )
+    if(this != NULL && (order ==0 || order==1) && pFunc != NULL )
     {
-        if(order == 0)
+        for(int i=0; i< lenght-1; i++ )
         {
-             for(int i=0;i<lenght-1;i++)
+            for(int j=i+1 ; j<lenght ;j++)
             {
-                aux=ll_get(this,i);
-                for(int j=i+1;j<lenght;j++)
+                if(order==1 && pFunc(ll_get(this,i),ll_get(this,j))>0 )
                 {
-                    aux1=ll_get(this,j);
-                    retornoFuncion=pFunc(aux,aux1);
-                    if(retornoFuncion==-1)
-                    {
-                        ll_set(this,i,aux1);
-                        ll_set(this,j,aux);
-
-                    }
-
+                    aux=ll_get(this,i);
+                    ll_set(this,i,ll_get(this,j));
+                    ll_set(this,j,aux);
                 }
-
-            }
-
-        }
-        else
-        {
-             for(int i=0;i<lenght-1;i++)
-            {
-                aux=ll_get(this,i);
-                for(int j=i+1;j<lenght;j++)
+                else if(order==0 && pFunc(ll_get(this,i),ll_get(this,j))<0 )
                 {
-                    aux1=ll_get(this,j);
-                    retornoFuncion=pFunc(aux,aux1);
-                    if(retornoFuncion==1)
-                    {
-                        ll_set(this,i,aux1);
-                        ll_set(this,j,aux);
-
-                    }
+                    aux=ll_get(this,i);
+                    ll_set(this,i,ll_get(this,j));
+                    ll_set(this,j,aux);
 
                 }
 
             }
         }
+        retorno=0;
     }
 
+
+
+
     return retorno;
+
 
 }
