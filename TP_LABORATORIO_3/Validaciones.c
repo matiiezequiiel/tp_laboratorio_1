@@ -4,7 +4,7 @@
 #include <string.h>
 #include <ctype.h>
 
-int validarIntEntreRangos(char entrada[] ,int rangoMinimo,int rangoMaximo)
+int validarIntEntreRangos(char entrada[],int rangoMinimo,int rangoMaximo)
 {
     int numeroValidar;
 
@@ -12,10 +12,8 @@ int validarIntEntreRangos(char entrada[] ,int rangoMinimo,int rangoMaximo)
 
     while(numeroValidar<rangoMinimo || numeroValidar>rangoMaximo)
     {
-      //  system("cls");
+
         printf("Numero invalido, reeingrese un numero valido: \n");
-     //   printf("1.Confirma.\n");
-     //   printf("2.Cancela.\n\n");
         printf("Ingrese opcion:");
         gets(entrada);
         numeroValidar=getInt(entrada);
@@ -60,7 +58,7 @@ int validarEntero (char* numeroValidar)
         retorno=1;
     }
 
-    for(i=0;i<lenght;i++)
+    for(i=0; i<lenght; i++)
     {
 
         if(isdigit(numeroValidar[i])==0) //0 NO ES NUMERO. !=0 ES NUMERO
@@ -71,5 +69,51 @@ int validarEntero (char* numeroValidar)
     }
 
     return retorno;
+
+}
+int validarCadena(char cadenaValidar[])
+{
+    int retorno=0;
+    int lenght;
+    int i;
+    int contadorEspacios=0;
+
+    lenght=strlen(cadenaValidar);
+
+    for(i=0; i<lenght; i++)
+    {
+        if(cadenaValidar[i]==' ')
+        {
+            contadorEspacios++;
+        }
+
+
+        if( (cadenaValidar[i]>='a' && cadenaValidar[i]<='z') || (cadenaValidar[i]>='A' && cadenaValidar[i]<='Z') )
+        {
+            retorno=1;
+        }
+        else
+        {
+            retorno=0;
+            break;
+        }
+
+    }
+
+
+    return retorno;
+
+
+}
+
+void formatearNombres (char* nombre)
+{
+    char apellidoNombre[30];
+
+    strlwr(nombre);
+
+    nombre[0]=toupper(nombre[0]);
+
+    strcpy(apellidoNombre, nombre);
 
 }

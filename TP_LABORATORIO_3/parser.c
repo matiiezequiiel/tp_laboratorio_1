@@ -5,68 +5,71 @@
 
 int parser_EmployeeFromText(FILE* pFile, LinkedList* pArrayListEmployee)
 {
-    //PARSEAR EL ARCHIVO,CONSTRUIR EMPLEADO, CARGAR CON LOS SETTERS EL CAMPO Y AGREGARLOS A LL
-
     char id[20];
     char nombre[20];
     char hsTrabajadas[20];
     char sueldo[20];
+    int retorno=0;
     Employee* empleado;
 
+    while(!feof(pFile))
+    {
+        fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n]\n",id,nombre,hsTrabajadas,sueldo);
+        empleado=employee_newParametros(id,nombre,hsTrabajadas,sueldo);
 
-    fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n]\n",id,nombre,hsTrabajadas,sueldo);
+        if(empleado!=NULL && pArrayListEmployee!=NULL)
+        {
+            ll_add(pArrayListEmployee,empleado);
+            retorno=1;
+        }
+    }
 
-    empleado=employee_newParametros(id,nombre,hsTrabajadas,sueldo);
-
-    ll_add(pArrayListEmployee,empleado);
-
-
-
-    return 1;
+    return retorno;
 
 }
 
 int parser_EmployeeFromBinary(FILE* pFile, LinkedList* pArrayListEmployee)
 {
-
     Employee* auxEmployee;
-    int retorno=1;
-    int cant;
+    int retorno=0;
 
-
-        auxEmployee= employee_new();
-        if(auxEmployee!=NULL)
-            {
-            cant = fread(auxEmployee, sizeof(Employee), 1, pFile);
-            ll_add(pArrayListEmployee, auxEmployee);
-
-            }
-
-
-
-
-
-
-
-  /*   while(!feof(pFile))
+    if(pArrayListEmployee!=NULL)
     {
-        auxEmployee= employee_new();
-        if(auxEmployee!=NULL){
-            cant = fread(auxEmployee, sizeof(Employee), 1, pFile);
+        while(!feof(pFile))
+        {
 
-            if(cant<1)
+            auxEmployee=employee_new();
+            if(fread(auxEmployee,sizeof(Employee),1,pFile)==1)
             {
-                if(!feof(pFile))
-                    retorno=0;
-                break;
-            }
-            if(ll_add(pArrayListEmployee, auxEmployee) == 0)
-            {
-
+                ll_add(pArrayListEmployee,auxEmployee);
                 retorno=1;
             }
+            else
+            {
+                break;
+            }
+
         }
-    }*/
+    }
+
+
     return retorno;
+    /*
+    while(!feof(pFile)&&pArrayListEmployee!=NULL)
+    {
+        auxEmployee=employee_new();
+        fread(auxEmployee,sizeof(Employee),1,pFile);
+
+        if (feof(pFile))
+        {
+            break;
+        }
+        else
+        {
+            ll_add(pArrayListEmployee,auxEmployee);
+        }
+
+    }
+*/
 
 }

@@ -19,13 +19,17 @@
     10. Salir
 *****************************************************/
 
+/*
+IMPORTANTE: EL PROGRAMA TIRA 3 WARNINGS, 2 SON PORQUE LA FUNCION SORT DE LA LINKEDLIST RECIBE DOS PUNTEROS A VOID EN LA FUNCION
+CRITERIO POR LO TANTO, AL NO PODER TOCAR LA FUNCION DE LA LINKEDLIST NO PUEDO QUITAR EL WARNING.
+Y LA OTRA ES LA FUNCIO TOUPPER QUE SI BIEN AGREGUE LA LIBRERIA STRING SIGUE APARECIENDO EL WARNING
+*/
 
 int main()
 {
     LinkedList* listaEmpleados;
-    Employee* empleado;
-    int lenght;
-    int i;
+    int retorno;
+    int archivoCargado=0;
 
     listaEmpleados=ll_newLinkedList();
 
@@ -33,64 +37,158 @@ int main()
 
     do
     {
+        system("cls");
         opcion=mostrarMenuABM();
 
         switch(opcion)
         {
         case 1:
-            controller_loadFromText("data.csv",listaEmpleados);
+            retorno=controller_loadFromText("data.csv",listaEmpleados);
+            if(!archivoCargado)
+            {
+                if(retorno)
+                {
+                    system("cls");
+                    printf("\nArchivo cargado correctamente.\n\n");
+                    system("pause");
+                    archivoCargado=1;
+                }
+                else
+                {
+                    system("cls");
+                    printf("\nNo se pudo cargar el archivo.\n\n");
+                    system("pause");
+                }
+            }
+            else
+            {
+                system("cls");
+                printf("El archivo ya fue cargado.\n\n");
+                system("pause");
+
+            }
+
             break;
 
         case 2:
-            controller_loadFromBinary("data.bin",listaEmpleados);
+            retorno=controller_loadFromBinary("data.bin",listaEmpleados);
+            if(!archivoCargado)
+            {
+                 if(retorno)
+                {
+                    system("cls");
+                    printf("\nArchivo cargado correctamente.\n\n");
+                    system("pause");
+                    archivoCargado=1;
+                }
+                else
+                {
+                    system("cls");
+                    printf("\nNo se pudo cargar el archivo.\n\n");
+                    system("pause");
+                }
+            }
+            else
+            {
+                system("cls");
+                printf("El archivo ya fue cargado.\n\n");
+                system("pause");
+
+            }
+
             break;
 
         case 3:
-            controller_addEmployee(listaEmpleados);
+            retorno=controller_addEmployee(listaEmpleados);
+            if(retorno)
+            {
+                system("cls");
+                printf("\nEmpleado cargado correctamente.\n\n");
+                system("pause");
+                archivoCargado=1;
+            }
+            else
+            {
+                system("cls");
+                printf("\nNo se pudo cargar el empleado.\n\n");
+                system("pause");
+            }
             break;
 
         case 4:
-            lenght=ll_len(listaEmpleados);
-            printf("ID    NOMBRE    HS TRABAJADAS   SUELDO");
-            for(i=0;i<lenght;i++)
+            controller_ListEmployee(listaEmpleados);
+            retorno=controller_editEmployee(listaEmpleados);
+            if(retorno)
             {
-                empleado=ll_get(listaEmpleados,i);
-                mostrarEmpleados(empleado);
+                system("cls");
+                printf("\nEmpleado editado correctamente.\n\n");
+                system("pause");
+                archivoCargado=1;
             }
-            controller_editEmployee(listaEmpleados);
+            else
+            {
+                system("cls");
+                printf("\nNo se pudo editar el empleado.\n\n");
+                system("pause");
+            }
             break;
 
         case 5:
-            lenght=ll_len(listaEmpleados);
-            printf("ID    NOMBRE    HS TRABAJADAS   SUELDO");
-            for(i=0;i<lenght;i++)
+            controller_ListEmployee(listaEmpleados);
+            retorno=controller_removeEmployee(listaEmpleados);
+            if(retorno)
             {
-                empleado=ll_get(listaEmpleados,i);
-                mostrarEmpleados(empleado);
+                system("cls");
+                printf("\nEmpleado eliminado correctamente.\n\n");
+                system("pause");
             }
-            controller_removeEmployee(listaEmpleados);
+            else
+            {
+                system("cls");
+                printf("\nNo se pudo eliminar al empleado.\n\n");
+                system("pause");
+            }
             break;
 
         case 6:
-            lenght=ll_len(listaEmpleados);
-            printf("ID    NOMBRE    HS TRABAJADAS   SUELDO");
-            for(i=0;i<lenght;i++)
-            {
-                empleado=ll_get(listaEmpleados,i);
-                mostrarEmpleados(empleado);
-            }
+           controller_ListEmployee(listaEmpleados);
             break;
 
         case 7:
+            controller_sortEmployee(listaEmpleados);
             break;
 
         case 8:
-            controller_saveAsText("nuevo.csv",listaEmpleados);
-            printf("prueba"):
+            retorno=controller_saveAsText("data.csv",listaEmpleados);
+            if(retorno)
+            {
+                system("cls");
+                printf("\nArchivo guardado correctamente.\n\n");
+                system("pause");
+            }
+            else
+            {
+                system("cls");
+                printf("\nNo se pudo cargar el archivo.\n\n");
+                system("pause");
+            }
+
             break;
 
         case 9:
-            controller_saveAsBinary("nuevo.bin",listaEmpleados);
+            retorno=controller_saveAsBinary("data.bin",listaEmpleados);
+            if(retorno)
+            {
+                system("cls");
+                printf("\nArchivo guardado correctamente.\n\n");
+                system("pause");
+            }
+            else
+            {
+                system("cls");
+                printf("\nNo se pudo cargar el archivo.\n\n");
+                system("pause");
+            }
             break;
 
         case 10:
